@@ -7,4 +7,5 @@ end
 require 'coopy/compare_flags'
 require 'coopy/change_type'
 require 'coopy/cell_info'
+require 'coopy/unit'
 require 'coopy/simple_cell'
