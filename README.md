@@ -4,7 +4,7 @@
 [![Dependency Status](https://gemnasium.com/theodi/coopy-ruby.png)](https://gemnasium.com/theodi/coopy-ruby)
 [![Code Climate](https://codeclimate.com/github/theodi/coopy-ruby.png)](https://codeclimate.com/github/theodi/coopy-ruby)
 
-A pure Ruby port of Paul Fitzgerald's [coopyhx](http://paulfitz.github.io/coopyhx) library for tabular diffs.
+A pure Ruby port of Paul Fitzpatrick's [coopyhx](http://paulfitz.github.io/coopyhx) library for tabular diffs.
 
 ## Installation
 
