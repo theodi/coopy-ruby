@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'coopyhx/version'
+require 'coopy/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "coopyhx"
-  spec.version       = Coopyhx::VERSION
+  spec.name          = "coopy"
+  spec.version       = Coopy::VERSION
   spec.authors       = ["James Smith"]
   spec.email         = ["james@floppy.org.uk"]
   spec.description   = %q{Ruby port of coopyhx, for calculating tabular diffs}

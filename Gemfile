@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.0.0'
-#ruby-gemset=coopyhx
+#ruby-gemset=coopy
 
-# Specify your gem's dependencies in coopyhx.gemspec
+# Specify your gem's dependencies in coopy.gemspec
 gemspec

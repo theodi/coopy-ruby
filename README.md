@@ -1,8 +1,8 @@
-# Coopyhx for Ruby
+# Coopy for Ruby
 
-[![Build Status](http://jenkins.theodi.org/job/coopyhx-ruby-master/badge/icon)](http://jenkins.theodi.org/job/coopyhx-ruby-master/)
-[![Dependency Status](https://gemnasium.com/theodi/coopyhx-ruby.png)](https://gemnasium.com/theodi/coopyhx-ruby)
-[![Code Climate](https://codeclimate.com/github/theodi/coopyhx-ruby.png)](https://codeclimate.com/github/theodi/coopyhx-ruby)
+[![Build Status](http://jenkins.theodi.org/job/coopy-ruby-master/badge/icon)](http://jenkins.theodi.org/job/coopy-ruby-master/)
+[![Dependency Status](https://gemnasium.com/theodi/coopy-ruby.png)](https://gemnasium.com/theodi/coopy-ruby)
+[![Code Climate](https://codeclimate.com/github/theodi/coopy-ruby.png)](https://codeclimate.com/github/theodi/coopy-ruby)
 
 A pure Ruby port of Paul Fitzgerald's [coopyhx](http://paulfitz.github.io/coopyhx) library for tabular diffs.
 
@@ -10,7 +10,7 @@ A pure Ruby port of Paul Fitzgerald's [coopyhx](http://paulfitz.github.io/coopyh
 
 Add this line to your application's Gemfile:
 
-    gem 'coopyhx'
+    gem 'coopy'
 
 And then execute:
 
@@ -18,7 +18,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install coopyhx
+    $ gem install coopy
 
 ## Usage
 
