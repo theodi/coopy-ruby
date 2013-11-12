@@ -1,5 +1,9 @@
 # Coopyhx for Ruby
 
+[![Build Status](http://jenkins.theodi.org/job/coopyhx-ruby-master/badge/icon)](http://jenkins.theodi.org/job/coopyhx-ruby-master/)
+[![Dependency Status](https://gemnasium.com/theodi/coopyhx-ruby.png)](https://gemnasium.com/theodi/coopyhx-ruby)
+[![Code Climate](https://codeclimate.com/github/theodi/coopyhx-ruby.png)](https://codeclimate.com/github/theodi/coopyhx-ruby)
+
 A pure Ruby port of Paul Fitzgerald's [coopyhx](http://paulfitz.github.io/coopyhx) library for tabular diffs.
 
 ## Installation
