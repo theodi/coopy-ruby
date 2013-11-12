@@ -4,6 +4,13 @@ module Coopy
   # Your code goes here...
 end
 
+# interfaces
+require 'coopy/bag'
+require 'coopy/row'
+require 'coopy/table'
+require 'coopy/view'
+
+# proper classes
 require 'coopy/compare_flags'
 require 'coopy/change_type'
 require 'coopy/cell_info'
