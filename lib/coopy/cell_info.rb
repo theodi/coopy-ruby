@@ -14,7 +14,7 @@ module Coopy
     attr_accessor :lvalue
     attr_accessor :rvalue
 
-    def to_string
+    def to_s
       return value if (!updated)
       return lvalue + "::" + rvalue if (!conflicted)
       return pvalue + "||" + lvalue + "::" + rvalue;

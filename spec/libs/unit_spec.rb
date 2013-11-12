@@ -15,7 +15,7 @@ describe Coopy::Unit do
       it "should marshall strings in and out correctly (#{lrp.to_s})" do
 
         u = Coopy::Unit.new lrp[0], lrp[1], lrp[2]
-        str = u.to_string
+        str = u.to_s
 
         nu = Coopy::Unit.new
         nu.from_string(str).should be_true

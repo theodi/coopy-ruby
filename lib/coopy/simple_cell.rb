@@ -7,8 +7,8 @@ module Coopy
       @datum = datum
     end
 
-    def to_string
-      @datum.to_string
+    def to_s
+      @datum.to_s
     end
 
   end

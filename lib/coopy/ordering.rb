@@ -15,8 +15,8 @@ module Coopy
       @order
     end
 
-    def to_string
-      @order.map{|x| x.to_string}.join(", ")
+    def to_s
+      @order.map{|x| x.to_s}.join(", ")
     end
 
     def ignore_parent

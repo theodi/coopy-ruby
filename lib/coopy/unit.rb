@@ -20,7 +20,7 @@ module Coopy
       (i>=0) ? ("" + i.to_s) : "-"
     end
 
-    def to_string
+    def to_s
       return describe(@p) + "|" + describe(@l) + ":" + describe(@r) if (@p>=-1)
       describe(@l) + ":" + describe(@r)
     end
