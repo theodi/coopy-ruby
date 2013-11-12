@@ -46,19 +46,17 @@ module Coopy
     end
 
     def allow_update
-      return true if (acts.nil?)
-      return acts.has_key?("update")
+      acts.nil? || acts.has_key?("update")
     end
 
     def allow_insert
-      return true if (acts.nil?)
-      return acts.has_key?("insert")
+      acts.nil? || acts.has_key?("insert")
     end
 
     def allow_delete
-      return true if (acts.nil?)
-      return acts.has_key?("delete");
+      acts.nil? || acts.has_key?("delete")
     end
+    
   end
 end
 
