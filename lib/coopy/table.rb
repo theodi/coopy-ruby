@@ -36,7 +36,7 @@ module Coopy
       raise NotImplementedError
     end
 
-    def function trim_blank 
+    def trim_blank 
       raise NotImplementedError
     end
     

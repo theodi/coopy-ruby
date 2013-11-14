@@ -31,12 +31,16 @@ module Coopy
       @ib = ib
     end
 
-    def setRowlike(flag)
+    def set_rowlike(flag)
+    end
+
+    def hb
+      @hb
     end
 
     def link(a, b)
-      @map_a2b.set(a,b)
-      @map_b2a.set(b,a)
+      @map_a2b[a] = b
+      @map_b2a[b] = a
       @map_count+=1
     end
 
@@ -102,7 +106,7 @@ module Coopy
         ref = Coopy::Alignment.new
         ref.range(@ha,@ha)
         ref.tables(@ta,@ta)
-        0..@ha-1.each do |i|
+        (0..@ha-1).each do |i|
           ref.link(i,i)
         end
       end
@@ -119,9 +123,9 @@ module Coopy
       vp = {}
       vl = {}
       vr = {}
-      0..hp-1.each { |i| vp.set(i,i) }
-      0..hl-1.each { |i| vl.set(i,i) }
-      0..hr-1.each { |i| vr.set(i,i) }
+      (0..hp-1).each { |i| vp.set(i,i) }
+      (0..hl-1).each { |i| vl.set(i,i) }
+      (0..hr-1).each { |i| vr.set(i,i) }
       ct_vp = hp
       ct_vl = hl
       ct_vr = hr
