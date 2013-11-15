@@ -20,7 +20,7 @@ module Coopy
     end
 
     def get_cell_view
-      Coopy::CsvView.new
+      Coopy::SimpleView.new
     end
 
     def is_resizable? 
