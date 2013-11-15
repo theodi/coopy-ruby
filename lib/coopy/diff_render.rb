@@ -47,11 +47,11 @@ module Coopy
     end
 
     def end_row() 
-        insert('</tr>\n')
+        insert("</tr>\n")
     end
 
     def end_table()  
-        insert('</table>\n')
+        insert("</table>\n")
     end
 
     def html() 
@@ -125,7 +125,7 @@ module Coopy
                         pretty_tokens[0] = mark_spaces(ref,tokens[2])
                         pretty_tokens[2] = mark_spaces(tokens[2],ref)
                     end
-                    cell.pretty_value = pretty_tokens.join(String.fromCharCode(8594))
+                    cell.pretty_value = pretty_tokens.join("→")
                     cell.category_given_tr = cell.category = cat
                     offset = cell.conflicted ? 1 : 0
                     cell.lvalue = tokens[offset]
@@ -139,17 +139,17 @@ module Coopy
     def self.mark_spaces(sl, sr) 
         return sl if (sl==sr)
         return sl if (sl.nil? || sr.nil?)
-        slc = StringTools.replace(sl," ","")
-        src = StringTools.replace(sr," ","")
+        slc = sl.gsub(" ","")
+        src = sr.gsub(" ","")
         return sl if (slc!=src)
         slo = ""
         il = 0
         ir = 0
         while (il<sl.length) 
-            cl = sl.charAt(il)
+            cl = sl[il]
             cr = ""
             if (ir<sr.length) 
-                cr = sr.charAt(ir)
+                cr = sr[ir]
             end
             if (cl==cr) 
                 slo += cl
@@ -158,7 +158,7 @@ module Coopy
             elsif (cr==" ") 
                 ir+=1
             else 
-                slo += 9251.chr
+                slo += " " # this is U+2423, open box
                 il+=1
             end
         end
