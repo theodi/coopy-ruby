@@ -8,6 +8,7 @@ require 'simplecov-rcov'
 SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
 SimpleCov.start
 
+require 'pry'
 require 'coopy'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
