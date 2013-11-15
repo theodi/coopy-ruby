@@ -13,7 +13,7 @@ describe "diffing tables" do
  
       alignment = Coopy.compare_tables(old_table,new_table).align
 
-      table_diff = Coopy::SimpleTable.new(5,5)
+      table_diff = Coopy::SimpleTable.new(0,0)
 
       flags = Coopy::CompareFlags.new
       highlighter = Coopy::TableDiff.new(alignment,flags)
@@ -55,7 +55,7 @@ describe "diffing tables" do
  
       alignment = Coopy.compare_tables(old_table,new_table).align
 
-      table_diff = Coopy::SimpleTable.new(5,5)
+      table_diff = Coopy::SimpleTable.new(0,0)
 
       flags = Coopy::CompareFlags.new
       highlighter = Coopy::TableDiff.new(alignment,flags)
