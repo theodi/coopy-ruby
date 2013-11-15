@@ -240,7 +240,7 @@ module Coopy
       end
 
       outer_reps_needed = 
-          (@flags.show_unchanged&&@flags.show_unchanged_columns) ? 1 : 2
+      (@flags.show_unchanged&&@flags.show_unchanged_columns) ? 1 : 2
 
       v = a.get_cell_view
       sep  = ""
@@ -286,7 +286,7 @@ module Coopy
               active_column[j] = 1 if (active_column)
             end
           end
-        end
+        end 
         if (reordered) 
           act = ":" + act
           have_schema = true
@@ -327,308 +327,308 @@ module Coopy
         top_line_done = true
       end
 
-        # If we are dropping unchanged rows/cols, we repeat this loop twice.
-        (0..outer_reps_needed-1).each do |out| 
-          if (out==1) 
-            spread_context(units,@flags.unchanged_context,active)
-            spread_context(column_units,@flags.unchanged_column_context,
-              active_column)
-            if (active_column) 
-              (0..column_units.length).each do |i| 
-                if (active_column[i]==3) 
-                  active_column[i] = 0
-                end
+      # If we are dropping unchanged rows/cols, we repeat this loop twice.
+      (0..outer_reps_needed-1).each do |out| 
+        if (out==1) 
+          spread_context(units,@flags.unchanged_context,active)
+          spread_context(column_units,@flags.unchanged_column_context,
+            active_column)
+          if (active_column) 
+            (0..column_units.length).each do |i| 
+              if (active_column[i]==3) 
+                active_column[i] = 0
               end
             end
           end
+        end
 
-          showed_dummy = false
-          l = -1
-          r = -1
-          (0..units.length-1).each do |i| 
-            unit = units[i]
-            reordered = false
+        showed_dummy = false
+        l = -1
+        r = -1
+        (0..units.length-1).each do |i| 
+          unit = units[i]
+          reordered = false
 
-            if (@flags.ordered) 
-              if (row_moves.has_key?(i)) 
-                reordered = true
+          if (@flags.ordered) 
+            if (row_moves.has_key?(i)) 
+              reordered = true
+            end
+            show_rc_numbers = true if (reordered)
+          end
+
+          next if (unit.r<0 && unit.l<0)
+
+          next if (unit.r==0 && unit.lp==0 && top_line_done)
+
+          act  = ""
+
+          act = ":" if (reordered) 
+
+          publish = @flags.show_unchanged
+          dummy = false
+          if (out==1) 
+            publish = active[i]>0
+            dummy = active[i]==3
+            next if (dummy&&showed_dummy)
+            next if (!publish)
+          end
+
+          showed_dummy = false if (!dummy)
+
+          at = output.height
+          if (publish) 
+            output.resize(column_units.length+1,at+1)
+          end
+
+          if (dummy) 
+            (0...column_units.length+1).each do |j| 
+              output.set_cell(j,at,v.to_datum("..."))
+              showed_dummy = true
+            end
+            next
+          end
+
+          have_addition = false
+          skip = false
+
+          if (unit.p<0 && unit.l<0 && unit.r>=0) 
+            skip = true if (!allow_insert)
+            act = "+++"
+          end
+          if ((unit.p>=0||!has_parent) && unit.l>=0 && unit.r<0) 
+            skip = true if (!allow_delete)
+            act = "---"
+          end
+
+          if (skip) 
+            if (!publish) 
+              if (active) 
+                active[i] = -3
               end
-              show_rc_numbers = true if (reordered)
             end
+            next
+          end
 
-            next if (unit.r<0 && unit.l<0)
-
-            next if (unit.r==0 && unit.lp==0 && top_line_done)
-
-            act  = ""
-
-            act = ":" if (reordered) 
-
-            publish = @flags.show_unchanged
-            dummy = false
-            if (out==1) 
-              publish = active[i]>0
-              dummy = active[i]==3
-              next if (dummy&&showed_dummy)
-              next if (!publish)
+          (0..column_units.length-1).each do |j| 
+            cunit = column_units[j]
+            pp = nil
+            ll = nil
+            rr = nil
+            dd = nil
+            dd_to = nil
+            have_dd_to = false
+            dd_to_alt = nil
+            have_dd_to_alt = false
+            have_pp = false
+            have_ll = false
+            have_rr = false
+            if (cunit.p>=0 && unit.p>=0) 
+              pp = p.get_cell(cunit.p,unit.p)
+              have_pp = true
             end
-
-            showed_dummy = false if (!dummy)
-
-            at = output.height
-            if (publish) 
-              output.resize(column_units.length+1,at+1)
+            if (cunit.l>=0 && unit.l>=0) 
+              ll = a.get_cell(cunit.l,unit.l)
+              have_ll = true
             end
-
-            if (dummy) 
-              (0...column_units.length+1).each do |j| 
-                output.set_cell(j,at,v.to_datum("..."))
-                showed_dummy = true
-              end
-              next
-            end
-
-            have_addition = false
-            skip = false
-
-            if (unit.p<0 && unit.l<0 && unit.r>=0) 
-              skip = true if (!allow_insert)
-              act = "+++"
-            end
-            if ((unit.p>=0||!has_parent) && unit.l>=0 && unit.r<0) 
-              skip = true if (!allow_delete)
-              act = "---"
-            end
-
-            if (skip) 
-              if (!publish) 
-                if (active) 
-                  active[i] = -3
-                end
-              end
-              next
-            end
-
-            (0..column_units.length-1).each do |j| 
-              cunit = column_units[j]
-              pp = nil
-              ll = nil
-              rr = nil
-              dd = nil
-              dd_to = nil
-              have_dd_to = false
-              dd_to_alt = nil
-              have_dd_to_alt = false
-              have_pp = false
-              have_ll = false
-              have_rr = false
-              if (cunit.p>=0 && unit.p>=0) 
-                pp = p.get_cell(cunit.p,unit.p)
-                have_pp = true
-              end
-              if (cunit.l>=0 && unit.l>=0) 
-                ll = a.get_cell(cunit.l,unit.l)
-                have_ll = true
-              end
-              if (cunit.r>=0 && unit.r>=0) 
-                rr = b.get_cell(cunit.r,unit.r)
-                have_rr = true
-                if ((have_pp ? cunit.p : cunit.l)<0) 
-                  if (rr != nil) 
-                    if (v.to_s(rr) != "") 
-                      if (@flags.allow_update) 
-                        have_addition = true
-                      end
+            if (cunit.r>=0 && unit.r>=0) 
+              rr = b.get_cell(cunit.r,unit.r)
+              have_rr = true
+              if ((have_pp ? cunit.p : cunit.l)<0) 
+                if (rr != nil) 
+                  if (v.to_s(rr) != "") 
+                    if (@flags.allow_update) 
+                      have_addition = true
                     end
                   end
                 end
               end
+            end
 
-              # for now, just interested in p->r
-              if (have_pp) 
-                if (!have_rr) 
+            # for now, just interested in p->r
+            if (have_pp) 
+              if (!have_rr) 
+                dd = pp
+              else 
+                # have_pp, have_rr
+                if (v.equals(pp,rr)) 
                   dd = pp
                 else 
-                  # have_pp, have_rr
-                  if (v.equals(pp,rr)) 
-                    dd = pp
-                  else 
-                    # rr is different
-                    dd = pp
-                    dd_to = rr
-                    have_dd_to = true
+                  # rr is different
+                  dd = pp
+                  dd_to = rr
+                  have_dd_to = true
 
-                    if (!v.equals(pp,ll)) 
-                      if (!v.equals(pp,rr)) 
-                        dd_to_alt = ll
-                        have_dd_to_alt = true
-                      end
+                  if (!v.equals(pp,ll)) 
+                    if (!v.equals(pp,rr)) 
+                      dd_to_alt = ll
+                      have_dd_to_alt = true
                     end
                   end
                 end
-              elsif (have_ll) 
-                if (!have_rr) 
+              end
+            elsif (have_ll) 
+              if (!have_rr) 
+                dd = ll
+              else 
+                if (v.equals(ll,rr)) 
                   dd = ll
                 else 
-                  if (v.equals(ll,rr)) 
-                    dd = ll
-                  else 
-                    # rr is different
-                    dd = ll
-                    dd_to = rr
-                    have_dd_to = true
-                  end
+                  # rr is different
+                  dd = ll
+                  dd_to = rr
+                  have_dd_to = true
+                end
+              end
+            else 
+              dd = rr
+            end
+
+            txt  = nil
+            if (have_dd_to&&allow_update) 
+              if (active_column) 
+                active_column[j] = 1
+              end
+              txt = quoteForDiff(v,dd)
+              # modification: x -> y
+              if (sep=="") 
+                # strictly speaking getSeparator(a,nil,..)
+                # would be ok - but very confusing
+                sep = getSeparator(a,b,"->")
+              end
+              is_conflict = false
+              if (have_dd_to_alt) 
+                if (!v.equals(dd_to,dd_to_alt)) 
+                  is_conflict = true
+                end
+              end
+              if (!is_conflict) 
+                txt = txt + sep + quoteForDiff(v,dd_to)
+                if (sep.length>act.length) 
+                  act = sep
                 end
               else 
-                dd = rr
+                if (conflict_sep=="") 
+                  conflict_sep = getSeparator(p,a,"!") + sep
+                end
+                txt = txt + 
+                conflict_sep + quoteForDiff(v,dd_to_alt) +
+                conflict_sep + quoteForDiff(v,dd_to)
+                act = conflict_sep
               end
-
-              txt  = nil
-              if (have_dd_to&&allow_update) 
+            end
+            if (act == "" && have_addition) 
+              act = "+"
+            end
+            if (act == "+++") 
+              if (have_rr) 
                 if (active_column) 
                   active_column[j] = 1
                 end
-                txt = quoteForDiff(v,dd)
-                # modification: x -> y
-                if (sep=="") 
-                  # strictly speaking getSeparator(a,nil,..)
-                  # would be ok - but very confusing
-                  sep = getSeparator(a,b,"->")
-                end
-                is_conflict = false
-                if (have_dd_to_alt) 
-                  if (!v.equals(dd_to,dd_to_alt)) 
-                    is_conflict = true
-                  end
-                end
-                if (!is_conflict) 
-                  txt = txt + sep + quoteForDiff(v,dd_to)
-                  if (sep.length>act.length) 
-                    act = sep
-                  end
-                else 
-                  if (conflict_sep=="") 
-                    conflict_sep = getSeparator(p,a,"!") + sep
-                  end
-                  txt = txt + 
-                  conflict_sep + quoteForDiff(v,dd_to_alt) +
-                  conflict_sep + quoteForDiff(v,dd_to)
-                  act = conflict_sep
-                end
-              end
-              if (act == "" && have_addition) 
-                act = "+"
-              end
-              if (act == "+++") 
-                if (have_rr) 
-                  if (active_column) 
-                    active_column[j] = 1
-                  end
-                end
-              end
-              if (publish) 
-                if (active_column.nil? || active_column[j]>0) 
-                  if (txt != nil) 
-                    output.set_cell(j+1,at,v.to_datum(txt))
-                  else 
-                    output.set_cell(j+1,at,dd)
-                  end
-                end
               end
             end
-
             if (publish) 
-              output.set_cell(0,at,v.to_datum(act))
-              row_map[at] = unit
-            end
-            if (act!="") 
-              if (!publish) 
-                if (active) 
-                  active[i] = 1
+              if (active_column.nil? || active_column[j]>0) 
+                if (txt != nil) 
+                  output.set_cell(j+1,at,v.to_datum(txt))
+                else 
+                  output.set_cell(j+1,at,dd)
                 end
               end
             end
           end
-        end
 
-        # add row/col numbers?
-        if (!show_rc_numbers) 
-          if (@flags.always_show_order) 
-            show_rc_numbers = true
-          elsif (@flags.ordered) 
-            show_rc_numbers = is_reordered(row_map,output.height)
-            if (!show_rc_numbers) 
-              show_rc_numbers = is_reordered(col_map,output.width)
+          if (publish) 
+            output.set_cell(0,at,v.to_datum(act))
+            row_map[at] = unit
+          end
+          if (act!="") 
+            if (!publish) 
+              if (active) 
+                active[i] = 1
+              end
             end
           end
         end
+      end
 
-        admin_w = 1
-        if (show_rc_numbers&&!@flags.never_show_order) 
-            admin_w+=1
-            target = new Array<Int>
-            (0..output.width-1).each do |i| 
-                target.push(i+1)
-            end
-            output.insert_or_delete_columns(target,output.width+1)
-            @l_prev = -1
-            @r_prev = -1
-            (0..output.height-1).each do |i| 
-                unit = row_map.get(i)
-                next if (unit.nil?)
-                output.setCell(0,i,reportUnit(unit))
-            end
-            target = []
-            (0..output.height-1).each do |i|
-                target.push(i+1)
-            end
-            output.insert_or_delete_rows(target,output.height+1)
-            @l_prev = -1
-            @r_prev = -1
-            (1..output.width-1).each do |i| 
-                unit = col_map.get(i-1)
-                next if (unit.nil?)
-                output.setCell(i,0,reportUnit(unit))
-            end
-            output.setCell(0,0,"@:@")
+      # add row/col numbers?
+      if (!show_rc_numbers) 
+        if (@flags.always_show_order) 
+          show_rc_numbers = true
+        elsif (@flags.ordered) 
+          show_rc_numbers = is_reordered(row_map,output.height)
+          if (!show_rc_numbers) 
+            show_rc_numbers = is_reordered(col_map,output.width)
+          end
         end
+      end
 
-        if (active_column) 
-            all_active = true
-            (0..active_column.length-1).each do |i| 
-                if (active_column[i]==0) 
-                    all_active = false
-                    break
-                end
-            end
-            if (!all_active) 
-                fate = new Array<Int>
-                (0..admin_w-1).each do |i| 
-                    fate.push(i)
-                end
-                at = admin_w
-                ct = 0
-                dots = new Array<Int>
-                (0..active_column.length-1).each do |i| 
-                    off = (active_column[i]==0)
-                    ct = off ? (ct+1) : 0
-                    if (off && ct>1) 
-                        fate.push(-1)
-                    else 
-                        dots.push(at) if (off)
-                        fate.push(at)
-                        at+=1
-                    end
-                end
-                output.insertOrDeleteColumns(fate,at)
-                dots.each do |d|
-                    (0..output.height-1).each do |j| 
-                        output.setCell(d,j,"...")
-                    end
-                end
-            end
+      admin_w = 1
+      if (show_rc_numbers&&!@flags.never_show_order) 
+        admin_w+=1
+        target = new Array<Int>
+        (0..output.width-1).each do |i| 
+          target.push(i+1)
         end
-        return true
+        output.insert_or_delete_columns(target,output.width+1)
+        @l_prev = -1
+        @r_prev = -1
+        (0..output.height-1).each do |i| 
+          unit = row_map.get(i)
+          next if (unit.nil?)
+          output.setCell(0,i,reportUnit(unit))
+        end
+        target = []
+        (0..output.height-1).each do |i|
+          target.push(i+1)
+        end
+        output.insert_or_delete_rows(target,output.height+1)
+        @l_prev = -1
+        @r_prev = -1
+        (1..output.width-1).each do |i| 
+          unit = col_map.get(i-1)
+          next if (unit.nil?)
+          output.setCell(i,0,reportUnit(unit))
+        end
+        output.setCell(0,0,"@:@")
+      end
+
+      if (active_column) 
+        all_active = true
+        (0..active_column.length-1).each do |i| 
+          if (active_column[i]==0) 
+            all_active = false
+            break
+          end
+        end
+        if (!all_active) 
+          fate = new Array<Int>
+          (0..admin_w-1).each do |i| 
+            fate.push(i)
+          end
+          at = admin_w
+          ct = 0
+          dots = new Array<Int>
+          (0..active_column.length-1).each do |i| 
+            off = (active_column[i]==0)
+            ct = off ? (ct+1) : 0
+            if (off && ct>1) 
+              fate.push(-1)
+            else 
+              dots.push(at) if (off)
+              fate.push(at)
+              at+=1
+            end
+          end
+          output.insertOrDeleteColumns(fate,at)
+          dots.each do |d|
+            (0..output.height-1).each do |j| 
+              output.setCell(d,j,"...")
+            end
+          end
+        end
+      end
+      return true
     end
-end
+  end
 end
