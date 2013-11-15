@@ -23,9 +23,9 @@ module Coopy
     def equals(d1, d2)
       #trace("Comparing " + d1 + " and " + d2 + " -- " +  (("" + d1) == ("" + d2)));
       return true if (d1==nil && d2==nil)
-      return true if (d1==nil && (""+d2)=="")
-      return true if ((""+d1)=="" && d2==nil)
-      return ("" + d1) == ("" + d2);
+      return true if (d1==nil && d2.to_s=="")
+      return true if (d1.to_s=="" && d2==nil)
+      return d1.to_s == d2.to_s
     end
 
     def to_datum(str)

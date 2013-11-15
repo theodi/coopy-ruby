@@ -96,12 +96,12 @@ module Coopy
       top = (2 ** columns.length).round
 
       pending = {}
-      (0..ha-1).each do |j| 
+      (0...ha).each do |j| 
         pending[j] = j
       end
       pending_ct = ha
       
-      (0..top-1).each do |k| 
+      (0...top).each do |k| 
         next if (k==0)
         break if (pending_ct == 0)
         active_columns = []
@@ -116,7 +116,7 @@ module Coopy
         end
 
         index = IndexPair.new
-        (0..active_columns.length-1).each do |k|
+        (0...active_columns.length).each do |k|
           unit = common_units[active_columns[k]]
           index.add_columns(unit.l,unit.r)
           align.add_index_columns(unit)
@@ -144,8 +144,8 @@ module Coopy
           fixed << j
           align.link(j,cross.item_b.lst[0])
         end
-        (0..fixed.length-1).each do |j|
-          pending.remove(fixed[j])
+        (0...fixed.length).each do |j|
+          pending.delete(fixed[j])
           pending_ct-=1
         end
       end

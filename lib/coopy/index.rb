@@ -22,7 +22,7 @@ module Coopy
 
     def index_table(t)
       @indexed_table = t
-      (0..t.height-1).each do |i|
+      (0...t.height).each do |i|
         key = ""
         if @keys.length > i
           key = @keys[i]

@@ -15,7 +15,7 @@ module Coopy
         (0..w-1).each do |x|
           txt = view.to_s(t.get_cell(x,y))
           next if (txt.nil?)
-          while (txt.indexOf(sep)>=0) 
+          while (txt.index(sep)) 
             sep = "-" + sep
           end
         end
@@ -25,9 +25,9 @@ module Coopy
         h = t2.height
         (0..h-1).each do |y|
           (0..w-1).each do |x|
-            txt = view.to_s(t2.getCell(x,y))
+            txt = view.to_s(t2.get_cell(x,y))
             next if (txt.nil?)
-            while (txt.indexOf(sep)>=0) 
+            while (txt.index(sep)) 
               sep = "-" + sep
             end
           end
@@ -44,10 +44,10 @@ module Coopy
       str = v.to_s(d)
       score = 0
       (0..str.length-1).each do |i| 
-        break if (str.charCodeAt(score)!='_'.code)
+        break if (str[score]!='_')
         score+=1
       end
-      if (str.substr(score)==nil_str) 
+      if (str.slice(score)==nil_str) 
         str = "_" + str
       end
       return str
@@ -409,7 +409,7 @@ module Coopy
             next
           end
 
-          (0..column_units.length-1).each do |j| 
+          (0...column_units.length).each do |j| 
             cunit = column_units[j]
             pp = nil
             ll = nil
@@ -488,12 +488,12 @@ module Coopy
               if (active_column) 
                 active_column[j] = 1
               end
-              txt = quoteForDiff(v,dd)
+              txt = quote_for_diff(v,dd)
               # modification: x -> y
               if (sep=="") 
                 # strictly speaking getSeparator(a,nil,..)
                 # would be ok - but very confusing
-                sep = getSeparator(a,b,"->")
+                sep = get_separator(a,b,"->")
               end
               is_conflict = false
               if (have_dd_to_alt) 
@@ -502,17 +502,17 @@ module Coopy
                 end
               end
               if (!is_conflict) 
-                txt = txt + sep + quoteForDiff(v,dd_to)
+                txt = txt + sep + quote_for_diff(v,dd_to)
                 if (sep.length>act.length) 
                   act = sep
                 end
               else 
                 if (conflict_sep=="") 
-                  conflict_sep = getSeparator(p,a,"!") + sep
+                  conflict_sep = get_separator(p,a,"!") + sep
                 end
                 txt = txt + 
-                conflict_sep + quoteForDiff(v,dd_to_alt) +
-                conflict_sep + quoteForDiff(v,dd_to)
+                conflict_sep + quote_for_diff(v,dd_to_alt) +
+                conflict_sep + quote_for_diff(v,dd_to)
                 act = conflict_sep
               end
             end
