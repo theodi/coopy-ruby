@@ -16,7 +16,7 @@ module Coopy
     attr_accessor :size
 
     def get_size
-      @h
+      @height
     end
 
     def get_cell(x, y)
@@ -32,11 +32,11 @@ module Coopy
     end
 
     def table_to_string(tab)
-      var = ""
+      x = ""
       (0..tab.height-1).each do |i|
         (0..tab.width-1).each do |j|
           x += " " if (j>0)
-          x += tab.getCell(j,i)
+          x += tab.get_cell(j,i).to_s
         end
         x += "\n"
       end
