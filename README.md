@@ -6,6 +6,8 @@
 
 A pure Ruby port of Paul Fitzpatrick's [coopyhx](http://paulfitz.github.io/coopyhx) library for tabular diffs.
 
+Not all the coopyhx code is ported or tested. There will be bugs. However, basic two-file CSV diff appears to be working. See 'Usage' section below for details.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -22,7 +24,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You can diff Ruby's built-in CSV objects, like so:
+
+```
+old_table = Coopy::CsvTable.new(old_csv_object)
+new_table = Coopy::CsvTable.new(new_csv_object)
+
+alignment = Coopy.compare_tables(old_table,new_table).align
+flags = Coopy::CompareFlags.new
+highlighter = Coopy::TableDiff.new(alignment,flags)
+
+diff_table = Coopy::SimpleTable.new(0,0)
+highlighter.hilite diff_table
+```
+
+You can inspect `diff_table` to see the changes.
+
+You can also generate an HTML view of this diff like this:
+
+```
+diff2html = Coopy::DiffRender.new
+diff2html.render diff_table
+html = diff2html.html
+```
+
+There is plenty more in the original coopyhx, but this is all that's known working at the moment.
 
 ## Contributing
 
