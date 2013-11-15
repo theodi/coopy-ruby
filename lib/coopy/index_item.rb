@@ -8,9 +8,9 @@ module Coopy
     end
 
     def add(i)
-      lst ||= []
-      lst << i
-      lst.length
+      @lst ||= []
+      @lst << i
+      @lst.length
     end
 
   end
