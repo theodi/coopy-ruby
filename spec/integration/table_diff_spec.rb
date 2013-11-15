@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "diffing tables" do
 
   [
+    "bridges",
     "planetary_bodies",
   ].each do |name|
 
