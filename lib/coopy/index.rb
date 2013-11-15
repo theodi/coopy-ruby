@@ -17,20 +17,20 @@ module Coopy
     end
  
     def add_column(i)
-      cols << i
+      @cols << i
     end
 
     def index_table(t)
       @indexed_table = t
-      0..t.height.each do |i|
+      (0..t.height-1).each do |i|
         key = ""
         if @keys.length > i
           key = @keys[i]
         else
-          key = toKey(t,i)
+          key = to_key(t,i)
           @keys << key
         end
-        item = @items.get(key)
+        item = @items[key]
         if item.nil?
           item = IndexItem.new
           @items[key] = item
@@ -43,10 +43,10 @@ module Coopy
 
     def to_key(table, i)
       wide = ""
-      @v = table.getCellView() if @v.nil?
+      @v = table.get_cell_view if @v.nil?
       @cols.each_with_index do |col, k|
         d = table.get_cell(col,i)
-        txt = @v.to_string(d)
+        txt = @v.to_s(d)
         next if (txt=="" || txt=="null" || txt=="undefined")
         wide += " // " if (k>0)
         wide += txt

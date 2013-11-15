@@ -7,8 +7,8 @@ module Coopy
 
     def initialize(csv)
       @csv = csv
-      @height = csv.lineno
-      @width = csv.headers.length rescue 0
+      @height = csv.size
+      @width = csv[0].size
     end
 
     def get_cell(x, y) 
@@ -32,7 +32,7 @@ module Coopy
     end
 
     def clear 
-      @csv = CSV::Table.new
+      @csv = []
     end
 
     def insert_or_delete_rows(fate, hfate) 

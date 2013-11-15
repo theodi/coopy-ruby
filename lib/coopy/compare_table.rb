@@ -212,7 +212,7 @@ module Coopy
           ma.keys.each do |key| 
             i0 = ma[key]
             i1 = mb[key]
-            if (i1>=0 && i0>=0) 
+            if (i1 && i1>=0 && i0>=0) 
               ct+=1
             end
           end

@@ -21,11 +21,11 @@ module Coopy
       v = nil
       (0..ltop+1-1).each do |i| 
         v = in_src[i]
-        isrc.push(v) if (v!=null)
+        isrc.push(v) if v
       end
       (0..rtop+1-1).each do |i|
         v = in_dest[i]
-        idest.push(v) if (v!=null)
+        idest.push(v) if v
       end
       return move_without_extras(isrc,idest)
     end
@@ -60,53 +60,62 @@ module Coopy
       return nil if (src.length!=dest.length) 
       return [] if (src.length<=1)
       
+      puts src.inspect
+      puts dest.inspect
+
       len = src.length
       in_src = {}
       blk_len = {}
       blk_src_loc = {}
       blk_dest_loc = {}
-      (0...len-1).each do |i|
+      (0...len).each do |i|
         in_src[src[i]] = i
       end
+      puts in_src.inspect
       ct = 0
       in_cursor = -2
       out_cursor = 0
       nxt = nil
       blk = -1
       v = nil
-      while (out_cursor<len) 
+      while (out_cursor<len)
         v = dest[out_cursor]
+        puts v
+        puts in_src.inspect 
         nxt = in_src[v]
+        puts nxt
         if (nxt != in_cursor+1) 
           blk = v
           ct = 1
-          blk_src_loc.set(blk,nxt)
-          blk_dest_loc.set(blk,out_cursor)
+          blk_src_loc[blk] = nxt
+          blk_dest_loc[blk] = out_cursor
         else 
           ct+=1
         end
-        blk_len.set(blk,ct)
+        blk_len[blk] = ct
         in_cursor = nxt
         out_cursor+=1
       end
 
-      blks = []
-      blk_len.keys.each { |k| blks.push(k) }
-      blks.sort_by!{ |a,b| blk_len[b]-blk_len[a] }
+      blks = blk_len.keys
+      puts blks
+      puts blk_len
+      blks.sort!{ |a,b| blk_len[a] <=> blk_len[b] }
 
       moved = []
 
       while (blks.length>0) 
-        blk = blks.shift()
+        blk = blks.shift
+        puts blk
         blen = blks.length
-        ref_src_loc = blk_src_loc.get(blk)
-        ref_dest_loc = blk_dest_loc.get(blk)
+        ref_src_loc = blk_src_loc[blk]
+        ref_dest_loc = blk_dest_loc[blk]
         i = blen-1
         while (i>=0) 
           blki = blks[i]
-          blki_src_loc = blk_src_loc.get(blki)
+          blki_src_loc = blk_src_loc[blki]
           to_left_src = blki_src_loc < ref_src_loc
-          to_left_dest = blk_dest_loc.get(blki) < ref_dest_loc
+          to_left_dest = blk_dest_loc[blki] < ref_dest_loc
           if (to_left_src!=to_left_dest) 
             ct = blk_len[blki]
             (0..ct-1).each do |j| 

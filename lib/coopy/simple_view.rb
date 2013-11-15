@@ -22,9 +22,9 @@ module Coopy
 
     def equals(d1, d2)
       #trace("Comparing " + d1 + " and " + d2 + " -- " +  (("" + d1) == ("" + d2)));
-      return true if (d1==null && d2==null)
-      return true if (d1==null && (""+d2)=="")
-      return true if ((""+d1)=="" && d2==null)
+      return true if (d1==nil && d2==nil)
+      return true if (d1==nil && (""+d2)=="")
+      return true if ((""+d1)=="" && d2==nil)
       return ("" + d1) == ("" + d2);
     end
 

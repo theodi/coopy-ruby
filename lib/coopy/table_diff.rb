@@ -190,8 +190,8 @@ module Coopy
         rb_header = @align.meta.get_target_header
         if (@align.get_index_columns) 
           @align.get_index_columns.each do |a2b|
-            is_index_a.set(a2b.l,true) if (a2b.l>=0) 
-            is_index_b.set(a2b.r,true) if (a2b.r>=0)
+            is_index_a[a2b.l] = true if (a2b.l>=0) 
+            is_index_b[a2b.r] = true if (a2b.r>=0)
           end
         end
       end
@@ -232,9 +232,9 @@ module Coopy
         (0..column_units.length-1).each do |i| 
           v = 0
           unit = column_units[i]
-          v = 1 if (unit.l>=0 && is_index_a.get(unit.l))
-          v = 1 if (unit.r>=0 && is_index_b.get(unit.r))
-          v = 1 if (unit.p>=0 && is_index_p.get(unit.p))
+          v = 1 if (unit.l>=0 && is_index_a[unit.l])
+          v = 1 if (unit.r>=0 && is_index_b[unit.r])
+          v = 1 if (unit.p>=0 && is_index_p[unit.p])
           active_column[i] = v
         end
       end
@@ -253,7 +253,7 @@ module Coopy
         reordered = false
 
         if (@flags.ordered) 
-          if (col_moves.exists(j)) 
+          if (col_moves.has_key?(j)) 
             reordered = true
           end
           show_rc_numbers = true if (reordered) 
@@ -322,7 +322,7 @@ module Coopy
                a.get_cell(cunit.lp,ra_header))
             end
           end
-          col_map.set(j+1,cunit)
+          col_map[j+1] = cunit
         end
         top_line_done = true
       end
@@ -529,9 +529,9 @@ module Coopy
               if (publish) 
                 if (active_column.nil? || active_column[j]>0) 
                   if (txt != nil) 
-                    output.setCell(j+1,at,v.toDatum(txt))
+                    output.set_cell(j+1,at,v.to_datum(txt))
                   else 
-                    output.setCell(j+1,at,dd)
+                    output.set_cell(j+1,at,dd)
                   end
                 end
               end
@@ -539,7 +539,7 @@ module Coopy
 
             if (publish) 
               output.set_cell(0,at,v.to_datum(act))
-              row_map.set(at,unit)
+              row_map[at] = unit
             end
             if (act!="") 
               if (!publish) 

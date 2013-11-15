@@ -56,11 +56,11 @@ module Coopy
     end
 
     def a2b(a)
-      @map_a2b.get(a)
+      @map_a2b[a]
     end
 
     def b2a(b)
-      @map_b2a.get(b)
+      @map_b2a[b]
     end
 
     def count
@@ -123,9 +123,9 @@ module Coopy
       vp = {}
       vl = {}
       vr = {}
-      (0..hp-1).each { |i| vp.set(i,i) }
-      (0..hl-1).each { |i| vl.set(i,i) }
-      (0..hr-1).each { |i| vr.set(i,i) }
+      (0..hp-1).each { |i| vp[i] = i }
+      (0..hl-1).each { |i| vl[i] = i }
+      (0..hr-1).each { |i| vr[i] = i }
       ct_vp = hp
       ct_vl = hl
       ct_vr = hr
@@ -174,7 +174,7 @@ module Coopy
           if zr.nil?
             if vr.has_key?(xr)
               order.add(-1,xr,-1)
-              vr.remove(xr)
+              vr.delete(xr)
                ct_vr-=1
             end
             xr+=1
@@ -187,9 +187,9 @@ module Coopy
             if vl.has_key?(xl)
               order.add(xl,-1,zl)
               prev = zl
-              vp.remove(zl)
+              vp.delete(zl)
               ct_vp-=1
-              vl.remove(xl)
+              vl.delete(xl)
               ct_vl-=1
               xp = zl+1
             end
@@ -221,11 +221,11 @@ module Coopy
             if vr.has_key?(xr)
               order.add(ref.a2b(zr),xr,zr)
               prev = zr
-              vp.remove(zr)
+              vp.delete(zr)
               ct_vp-=1
-              vl.remove(ref.a2b(zr))
+              vl.delete(ref.a2b(zr))
               ct_vl-=1
-              vr.remove(xr)
+              vr.delete(xr)
               ct_vr-=1
               xp = zr+1
               xl = ref.a2b(zr)+1
