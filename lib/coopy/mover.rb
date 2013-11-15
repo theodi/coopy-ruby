@@ -19,11 +19,11 @@ module Coopy
         end
       end
       v = nil
-      (0..ltop+1-1).each do |i| 
+      (0...ltop+1).each do |i| 
         v = in_src[i]
         isrc.push(v) if v
       end
-      (0..rtop+1-1).each do |i|
+      (0...rtop+1).each do |i|
         v = in_dest[i]
         idest.push(v) if v
       end

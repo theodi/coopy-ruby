@@ -106,7 +106,7 @@ module Coopy
         ref = Coopy::Alignment.new
         ref.range(@ha,@ha)
         ref.tables(@ta,@ta)
-        (0..@ha-1).each do |i|
+        (0...@ha).each do |i|
           ref.link(i,i)
         end
       end
@@ -123,9 +123,9 @@ module Coopy
       vp = {}
       vl = {}
       vr = {}
-      (0..hp-1).each { |i| vp[i] = i }
-      (0..hl-1).each { |i| vl[i] = i }
-      (0..hr-1).each { |i| vr[i] = i }
+      (0...hp).each { |i| vp[i] = i }
+      (0...hl).each { |i| vl[i] = i }
+      (0...hr).each { |i| vr[i] = i }
       ct_vp = hp
       ct_vl = hl
       ct_vr = hr

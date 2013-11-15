@@ -248,7 +248,7 @@ module Coopy
 
       schema = []
       have_schema = false
-      (0...column_units.length-1).each do |j|
+      (0...column_units.length).each do |j|
         cunit = column_units[j]
         reordered = false
 
@@ -299,7 +299,7 @@ module Coopy
         at = output.height
         output.resize(column_units.length+1,at+1)
         output.set_cell(0,at,v.to_datum("!"))
-        (0..column_units.length-1).each do |j|
+        (0...column_units.length).each do |j|
           output.set_cell(j+1,at,v.to_datum(schema[j]))
         end
       end
@@ -309,7 +309,7 @@ module Coopy
         at = output.height
         output.resize(column_units.length+1,at+1)
         output.set_cell(0,at,v.to_datum("@@"))
-        (0...column_units.length-1).each do |j| 
+        (0...column_units.length).each do |j| 
           cunit = column_units[j]
           if (cunit.r>=0) 
             if (b.height>0) 
@@ -381,7 +381,7 @@ module Coopy
             end
 
             if (dummy) 
-              (0..(column_units.length+1)-1).each do |j| 
+              (0...column_units.length+1).each do |j| 
                 output.set_cell(j,at,v.to_datum("..."))
                 showed_dummy = true
               end
