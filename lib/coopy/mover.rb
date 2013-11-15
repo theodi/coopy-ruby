@@ -60,9 +60,6 @@ module Coopy
       return nil if (src.length!=dest.length) 
       return [] if (src.length<=1)
       
-      puts src.inspect
-      puts dest.inspect
-
       len = src.length
       in_src = {}
       blk_len = {}
@@ -71,7 +68,6 @@ module Coopy
       (0...len).each do |i|
         in_src[src[i]] = i
       end
-      puts in_src.inspect
       ct = 0
       in_cursor = -2
       out_cursor = 0
@@ -80,10 +76,7 @@ module Coopy
       v = nil
       while (out_cursor<len)
         v = dest[out_cursor]
-        puts v
-        puts in_src.inspect 
         nxt = in_src[v]
-        puts nxt
         if (nxt != in_cursor+1) 
           blk = v
           ct = 1
@@ -98,15 +91,12 @@ module Coopy
       end
 
       blks = blk_len.keys
-      puts blks
-      puts blk_len
       blks.sort!{ |a,b| blk_len[a] <=> blk_len[b] }
 
       moved = []
 
       while (blks.length>0) 
         blk = blks.shift
-        puts blk
         blen = blks.length
         ref_src_loc = blk_src_loc[blk]
         ref_dest_loc = blk_dest_loc[blk]
