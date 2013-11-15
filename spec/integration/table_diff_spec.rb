@@ -6,7 +6,7 @@ describe "diffing tables" do
     "planetary_bodies",
   ].each do |name|
 
-    it "should generate correct HTML for #{name}" do
+    it "should generate correct diff for #{name}" do
 
       old_table = Coopy::CsvTable.new(CSV.parse(load_fixture("#{name}_old.csv")))
       new_table = Coopy::CsvTable.new(CSV.parse(load_fixture("#{name}_new.csv")))
