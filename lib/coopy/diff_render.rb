@@ -125,6 +125,9 @@ module Coopy
                         pretty_tokens[0] = mark_spaces(ref,tokens[2])
                         pretty_tokens[2] = mark_spaces(tokens[2],ref)
                     end
+                    if (tokens.length == 0)
+                        pretty_tokens = ['','']
+                    end
                     cell.pretty_value = pretty_tokens.join("→")
                     cell.category_given_tr = cell.category = cat
                     offset = cell.conflicted ? 1 : 0
