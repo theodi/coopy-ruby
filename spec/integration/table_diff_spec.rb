@@ -61,13 +61,11 @@ describe "diffing tables" do
       highlighter = Coopy::TableDiff.new(alignment,flags)
       highlighter.hilite table_diff
 
-      # Not implemented yet below here
+      diff2html = Coopy::DiffRender.new
+      diff2html.render table_diff
+      diff_html = diff2html.html
 
-      # diff2html = Coopy::DiffRender.new
-      # diff2html.render table_diff
-      # diff_html = diff2html.html
-
-      # diff_html.should == load_fixture("#{name}.html")
+      diff_html.should == load_fixture("#{name}.html")
 
     end
 
