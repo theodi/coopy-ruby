@@ -1,9 +1,12 @@
-# Coopy for Ruby
+[![Build Status](http://img.shields.io/travis/theodi/coopy-ruby.svg)](https://travis-ci.org/theodi/coopy-ruby)
+[![Dependency Status](http://img.shields.io/gemnasium/theodi/coopy-ruby.svg)](https://gemnasium.com/theodi/coopy-ruby)
+[![Coverage Status](http://img.shields.io/coveralls/theodi/coopy-ruby.svg)](https://coveralls.io/r/theodi/coopy-ruby)
+[![Code Climate](http://img.shields.io/codeclimate/github/theodi/coopy-ruby.svg)](https://codeclimate.com/github/theodi/coopy-ruby)
+[![Gem Version](http://img.shields.io/gem/v/coopy.svg)](https://rubygems.org/gems/coopy)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://theodi.mit-license.org)
+[![Badges](http://img.shields.io/:badges-7/7-ff6799.svg)](https://github.com/pikesley/badger)
 
-[![Gem Version](https://badge.fury.io/rb/coopy.png)](http://badge.fury.io/rb/coopy)
-[![Build Status](http://jenkins.theodi.org/job/coopy-ruby-master/badge/icon)](http://jenkins.theodi.org/job/coopy-ruby-master/)
-[![Dependency Status](https://gemnasium.com/theodi/coopy-ruby.png)](https://gemnasium.com/theodi/coopy-ruby)
-[![Code Climate](https://codeclimate.com/github/theodi/coopy-ruby.png)](https://codeclimate.com/github/theodi/coopy-ruby)
+# Coopy for Ruby
 
 A pure Ruby port of Paul Fitzpatrick's [coopyhx](http://paulfitz.github.io/coopyhx) library for tabular diffs.
 
