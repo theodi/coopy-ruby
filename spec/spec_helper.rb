@@ -3,10 +3,8 @@
 # Require this file using `require "spec_helper"` to ensure that it is only
 # loaded once.
 
-require 'simplecov'
-require 'simplecov-rcov'
-SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
-SimpleCov.start
+require 'coveralls'
+Coveralls.wear!
 
 require 'pry'
 require 'coopy'
