@@ -112,7 +112,7 @@ module Coopy
               moved.push(src[blki_src_loc])
               blki_src_loc+=1
             end
-            blks.splice(i,1)
+            blks.delete_at(i)
           end
           i-=1
         end

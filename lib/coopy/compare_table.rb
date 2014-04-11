@@ -231,7 +231,7 @@ module Coopy
       ma_best.keys.each do |key|
         i0 = ma_best[key]
         i1 = mb_best[key]
-        if (i1>=0 && i0>=0) 
+        if (!i1.nil? && !i0.nil?)
           align.link(i0,i1)
         end
       end
