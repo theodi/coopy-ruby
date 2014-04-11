@@ -47,7 +47,7 @@ module Coopy
       @cols.each_with_index do |col, k|
         d = table.get_cell(col,i)
         txt = @v.to_s(d)
-        next if (txt=="" || txt=="null" || txt=="undefined")
+        next if (txt.nil? || txt=="" || txt=="null" || txt=="undefined")
         wide += " // " if (k>0)
         wide += txt
       end
@@ -58,7 +58,7 @@ module Coopy
       wide = ""
       @cols.each_with_index do |col, k|
         txt = row.get_row_string(col)
-        next if (txt=="" || txt=="null" || txt=="undefined")
+        next if (txt.nil? || txt=="" || txt=="null" || txt=="undefined")
         wide += " // " if (k>0)
         wide += txt
       end
