@@ -8,9 +8,9 @@
 
 # Coopy for Ruby
 
-A pure Ruby port of Paul Fitzpatrick's [coopyhx](http://paulfitz.github.io/coopyhx) library for tabular diffs.
+A pure Ruby port of Paul Fitzpatrick's [daff](http://paulfitz.github.io/daff) (formerly "coopyhx") library for tabular diffs.
 
-Not all the coopyhx code is ported or tested. There will be bugs. However, basic two-file CSV diff appears to be working. See 'Usage' section below for details.
+Not all the daff code is ported or tested. There will be bugs. However, basic two-file CSV diff appears to be working. See 'Usage' section below for details.
 
 ## Installation
 
@@ -52,7 +52,7 @@ diff2html.render diff_table
 html = diff2html.html
 ```
 
-There is plenty more in the original coopyhx, but this is all that's known working at the moment.
+There is plenty more in the original library, but this is all that's known working at the moment.
 
 ## Contributing
 
