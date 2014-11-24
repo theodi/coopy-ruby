@@ -148,7 +148,7 @@ module Coopy
             if vp.has_key?(xp)
               order.add(-1,-1,xp)
               prev = xp
-              vp.remove(xp)
+              vp.delete(xp)
               ct_vp-=1
             end
             xp+=1
@@ -162,7 +162,7 @@ module Coopy
           if zl.nil?
             if vl.has_key?(xl)
               order.add(xl,-1,-1)
-              vl.remove(xl)
+              vl.delete(xl)
               ct_vl-=1
             end
             xl+=1
@@ -203,9 +203,9 @@ module Coopy
             if vr.has_key?(xr)
               order.add(-1,xr,zr)
               prev = zr
-              vp.remove(zr)
+              vp.delete(zr)
               ct_vp-=1
-              vr.remove(xr)
+              vr.delete(xr)
               ct_vr-=1
               xp = zr+1
             end
@@ -236,11 +236,11 @@ module Coopy
             if vl.has_key?(xl)
               order.add(xl,a2b(zl),zl)
               prev = zl
-              vp.remove(zl)
+              vp.delete(zl)
               ct_vp-=1
-              vl.remove(xl)
+              vl.delete(xl)
               ct_vl-=1
-              vr.remove(a2b(zl))
+              vr.delete(a2b(zl))
               ct_vr-=1
               xp = zl+1
               xr = a2b(zl)+1
